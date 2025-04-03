@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Dorsa Valipourkarimi / COMP 272 002
  *
  *   This java file contains the problem solutions for the methods lastBoulder,
  *   showDuplicates, and pair methods. You should utilize the Java Collection
@@ -27,9 +27,9 @@ public class ProblemSolutions {
      * two boulders and smash them together. Suppose the heaviest two boulders have
      * weights x and y. The result of this smash is:
      *
-     *    If x == y, both boulders are destroyed, and
-     *    If x != y, the boulder of weight x is destroyed, and the boulder of
-     *               weight y has new weight y - x.
+     * If x == y, both boulders are destroyed, and
+     * If x != y, the boulder of weight x is destroyed, and the boulder of
+     * weight y has new weight y - x.
      *
      * At the end of the game, there is at most one boulder left.
      *
@@ -63,14 +63,13 @@ public class ProblemSolutions {
      * returning the 0 if queue is empty else return pq.peek().
      */
 
-  public static int lastBoulder(int[] boulders) {
+    public static int lastBoulder(int[] boulders) {
 
-      //
-      // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME / SECTION # ABOVE
-      //
-      return -1;
-  }
-
+        //
+        // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME / SECTION # ABOVE
+        //
+        return -1;
+    }
 
     /**
      * Method showDuplicates
@@ -81,59 +80,97 @@ public class ProblemSolutions {
      * This returned array list is returned in sorted ascending order. Note that
      * this method should consider case (strings are case-sensitive).
      *
-     * For example, if the input list was: "Lion", "Dog", "Cat", "Dog", "Horse", "Lion", "CAT"
+     * For example, if the input list was: "Lion", "Dog", "Cat", "Dog", "Horse",
+     * "Lion", "CAT"
      * the method would return an ArrayList<String> containing: "Dog", "Lion"
      *
-     * @param  input an ArrayList<String>
-     * @return       an ArrayList<String> containing only unique strings that appear
-     *               more than once in the input list. They will be in ascending order.
+     * @param input an ArrayList<String>
+     * @return an ArrayList<String> containing only unique strings that appear
+     *         more than once in the input list. They will be in ascending order.
      */
 
     public static ArrayList<String> showDuplicates(ArrayList<String> input) {
 
-        //
-        //  YOUR CODE GOES HERE
-        //
-        return new ArrayList<>();  // Make sure result is sorted in ascending order
+        HashMap<String, Integer> counts = new HashMap<>();
+        ArrayList<String> result = new ArrayList<>();
+
+        // Count how many times each string appears
+        for (String word : input) {
+            if (counts.containsKey(word)) {
+                counts.put(word, counts.get(word) + 1);
+            } else {
+                counts.put(word, 1);
+            }
+        }
+
+        // Collect strings that appear more than once
+        for (String word : counts.keySet()) {
+            if (counts.get(word) > 1) {
+                result.add(word);
+            }
+        }
+
+        // Sort the result list in ascending order
+        Collections.sort(result);
+
+        return result;
 
     }
-
 
     /**
      * Finds pairs in the input array that add up to k.
      *
-     * @param input   Array of integers
-     * @param k       The sum to find pairs for
-
+     * @param input Array of integers
+     * @param k     The sum to find pairs for
+     * 
      * @return an ArrayList<String> containing a list of strings. The ArrayList
-     *        of strings needs to be ordered both within a pair, and
-     *        between pairs in ascending order. E.g.,
+     *         of strings needs to be ordered both within a pair, and
+     *         between pairs in ascending order. E.g.,
      *
      *         - Ordering within a pair:
-     *            A string is a pair in the format "(a, b)", where a and b are
-     *            ordered lowest to highest, e.g., if a pair was the numbers
-     *            6 and 3, then the string would be "(3, 6)", and NOT "(6, 3)".
+     *         A string is a pair in the format "(a, b)", where a and b are
+     *         ordered lowest to highest, e.g., if a pair was the numbers
+     *         6 and 3, then the string would be "(3, 6)", and NOT "(6, 3)".
      *         - Ordering between pairs:
-     *            The ordering of strings of pairs should be sorted in lowest to
-     *            highest pairs. E.g., if the following two string pairs within
-     *            the returned ArraryList, "(3, 6)" and "(2, 7), they should be
-     *            ordered in the ArrayList returned as "(2, 7)" and "(3, 6 )".
+     *         The ordering of strings of pairs should be sorted in lowest to
+     *         highest pairs. E.g., if the following two string pairs within
+     *         the returned ArraryList, "(3, 6)" and "(2, 7), they should be
+     *         ordered in the ArrayList returned as "(2, 7)" and "(3, 6 )".
      *
      *         Example output:
      *         If the input array list was {2, 3, 3, 4, 5, 6, 7}, then the
      *         returned ArrayList<String> would be {"(2, 7)", "(3, 6)", "(4, 5)"}
      *
-     *  HINT: Considering using any Java Collection Framework ADT that we have used
-     *  to date, though HashSet. Consider using Java's "Collections.sort()" for final
-     *  sort of ArrayList before returning so consistent answer. Utilize Oracle's
-     *  Java Framework documentation in its use.
+     *         HINT: Considering using any Java Collection Framework ADT that we
+     *         have used
+     *         to date, though HashSet. Consider using Java's "Collections.sort()"
+     *         for final
+     *         sort of ArrayList before returning so consistent answer. Utilize
+     *         Oracle's
+     *         Java Framework documentation in its use.
      */
 
     public static ArrayList<String> pair(int[] input, int k) {
 
-        //
-        //  YOUR CODE GOES HERE
-        //
-        return new ArrayList<>();  // Make sure returned lists is sorted as indicated above
+        HashSet<Integer> seen = new HashSet<>();
+        HashSet<String> uniquePairs = new HashSet<>();
+    
+        for (int i = 0; i < input.length; i++) {
+            int num = input[i];
+            int complement = k - num;
+    
+            if (seen.contains(complement)) {
+                int low = Math.min(num, complement);
+                int high = Math.max(num, complement);
+                String pairStr = "(" + low + ", " + high + ")";
+                uniquePairs.add(pairStr);  // prevents duplicates
+            }
+    
+            seen.add(num);
+        }
+    
+        ArrayList<String> result = new ArrayList<>(uniquePairs);
+        Collections.sort(result);
+        return result;
     }
 }
