@@ -65,10 +65,26 @@ public class ProblemSolutions {
 
     public static int lastBoulder(int[] boulders) {
 
-        //
-        // ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOUR NAME / SECTION # ABOVE
-        //
-        return -1;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int boulder : boulders) {
+            pq.add(boulder);
+        }
+
+        while (pq.size() > 1) {
+            int first = pq.poll();
+            int second = pq.poll();
+
+            if (first != second) {
+                pq.add(first - second);
+            }
+        }
+
+        if (pq.isEmpty()) {
+            return 0;
+        } else {
+            return pq.peek();
+        }
     }
 
     /**
