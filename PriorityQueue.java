@@ -185,13 +185,13 @@ class PriorityQueue<E, P> {
      */
 
     public boolean contains(E e) {
-
+        boolean result = false;
         for (Node node : tree) {
             if (node.value.equals(e)) {
-                return true;
+                result = true;
             }
         }
-        return false;
+        return result;
     }
 
     /**
