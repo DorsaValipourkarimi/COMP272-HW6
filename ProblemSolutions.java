@@ -64,22 +64,26 @@ public class ProblemSolutions {
      */
 
     public static int lastBoulder(int[] boulders) {
-
+        // creates a max-heap to always access the two heaviest boulders
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
+        // adds all boulders to the max-heap
         for (int boulder : boulders) {
             pq.add(boulder);
         }
 
+        // keeps smashing the two heaviest boulders until one or none remain
         while (pq.size() > 1) {
             int first = pq.poll();
             int second = pq.poll();
 
+            // if the weights are not equal, the remaining weight goes back into the heap
             if (first != second) {
                 pq.add(first - second);
             }
         }
 
+        // returns the last remaining boulder, or 0 if none are left
         if (pq.isEmpty()) {
             return 0;
         } else {
