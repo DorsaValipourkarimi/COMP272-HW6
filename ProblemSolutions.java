@@ -107,30 +107,38 @@ public class ProblemSolutions {
 
     public static ArrayList<String> showDuplicates(ArrayList<String> input) {
 
+        // creates a map to keep track of how many times each string appears
         HashMap<String, Integer> counts = new HashMap<>();
+
+        // creates a list to store strings that appear more than once
         ArrayList<String> result = new ArrayList<>();
 
-        // Count how many times each string appears
+        // loops through each string in the input list
         for (String word : input) {
+            // if the string is already in the map, increment its count
             if (counts.containsKey(word)) {
                 counts.put(word, counts.get(word) + 1);
-            } else {
+            }
+            // if the string is not in the map, add it with a count of 1
+            else {
                 counts.put(word, 1);
             }
         }
 
-        // Collect strings that appear more than once
+        // loops through the keys in the map
         for (String word : counts.keySet()) {
+            // if the string’s count is greater than 1, it is a duplicate
             if (counts.get(word) > 1) {
+                // adds the duplicate string to the result list
                 result.add(word);
             }
         }
 
-        // Sort the result list in ascending order
+        // sorts the result list in alphabetical order
         Collections.sort(result);
 
+        // returns the final list of sorted duplicates
         return result;
-
     }
 
     /**
@@ -167,26 +175,39 @@ public class ProblemSolutions {
      */
 
     public static ArrayList<String> pair(int[] input, int k) {
-
+        // stores numbers that have already been seen
         HashSet<Integer> seen = new HashSet<>();
+
+        // stores formatted string pairs to avoid duplicates
         HashSet<String> uniquePairs = new HashSet<>();
-    
+
+        // loops through each number in the input array
         for (int i = 0; i < input.length; i++) {
             int num = input[i];
             int complement = k - num;
-    
+
+            // checks if the complement has already been seen
             if (seen.contains(complement)) {
+                // determines the lower and higher values for formatting
                 int low = Math.min(num, complement);
                 int high = Math.max(num, complement);
+
+                // formats the pair as a string and adds to the set
                 String pairStr = "(" + low + ", " + high + ")";
-                uniquePairs.add(pairStr);  // prevents duplicates
+                uniquePairs.add(pairStr);
             }
-    
+
+            // adds the current number to the set of seen values
             seen.add(num);
         }
-    
+
+        // converts the set of unique pairs into a list
         ArrayList<String> result = new ArrayList<>(uniquePairs);
+
+        // sorts the list of pairs in ascending order
         Collections.sort(result);
+
+        // returns the sorted list of string pairs
         return result;
     }
 }
