@@ -64,10 +64,10 @@ public class ProblemSolutions {
      */
 
     public static int lastBoulder(int[] boulders) {
-        // creates a max-heap to always access the two heaviest boulders
+        // creates a max heap to always access the two heaviest boulder
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
 
-        // adds all boulders to the max-heap
+        // adds all boulders to the maxheap
         for (int boulder : boulders) {
             pq.add(boulder);
         }
