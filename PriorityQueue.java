@@ -1,7 +1,7 @@
 
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   Dorsa Valipourkarimi / COMP 272 002
  *
  *   Note, additional comments provided throughout this source code
  *   is for educational purposes
@@ -168,9 +168,16 @@ class PriorityQueue<E, P> {
 
     public Node add(E e, P priority) {
 
+        // create a new node with the given element and priority
         Node newNode = new Node(e, priority, tree.size());
+
+        // place it as the rightmost leaf in the heap
         tree.add(newNode);
+
+        // pull it up to the correct spot to maintain min-heap order
         pullUp(newNode.idx);
+
+        // return the new node
         return newNode;
     }
 
@@ -185,12 +192,17 @@ class PriorityQueue<E, P> {
      */
 
     public boolean contains(E e) {
+        // start by assuming the element isn’t in the heap
         boolean result = false;
+
+        // check every node in the heap to see if the value matches
         for (Node node : tree) {
             if (node.value.equals(e)) {
                 result = true;
             }
         }
+
+        // return true if we found it, otherwise false
         return result;
     }
 
